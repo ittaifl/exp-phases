@@ -30,8 +30,10 @@ import torch
 
 class WallFixedFOVc(FieldOfViewOVCs):
 
-    def __init__(self, Agent, params={}):
+    def __init__(self, Agent, params={}, x_ratio: float = 1.0, y_ratio: float = 1.0):
         super().__init__(Agent, params)
+        self.x_ratio = x_ratio
+        self.y_ratio = y_ratio
         self.history['tuning_distances'] = []
         self.history['sigma_distances'] = []
         self.history['sigma_angles'] = []
@@ -125,7 +127,9 @@ class WallFixedFOVc(FieldOfViewOVCs):
         self.history['tuning_distances'].append(self.tuning_distances.copy())
         self.history['sigma_distances'].append(self.sigma_distances.copy())
         self.history['sigma_angles'].append(self.sigma_angles.copy())
-        self.history['dists'].append(self.dists.copy() / np.linalg.norm([x_ratio, y_ratio]))
+        self.history['dists'].append(
+            self.dists.copy() / np.linalg.norm([self.x_ratio, self.y_ratio])
+        )
 
     def reset_history(self):
         super().reset_history()
