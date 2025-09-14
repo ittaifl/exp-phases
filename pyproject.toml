@@ -1,11 +1,12 @@
+
 [build-system]
 requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "exp-phases"
-version = "0.1.0"
-description = "Exact reusable pieces for Ittai's experiment phases"
+version = "0.1.1"
+description = "Exact reusable pieces for Ittai's experiment phases (vendored)"
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{name="Ittai"}]
