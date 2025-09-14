@@ -1,16 +1,11 @@
 
-import importlib.util, pathlib, types
+import types
 
-_NEED = {
-    "WallFixedFOVc", "rescale_env_with_locations", "get_next_move",
-    "masked_copy_noisy", "NextStepRNN", "NormReLU", "HardSigmoid"
-}
+# Precompiled safe module source containing ONLY imports + selected class/def bodies
+from .original_ast_only import *  # noqa: F401,F403
 
-def _load_symbols():
-    p = pathlib.Path(__file__).with_name("original_sanitized.py")
-    src = p.read_text()
-    ns = {}
-    exec(src, ns, ns)
-    return {k: ns[k] for k in _NEED if k in ns}
-
-SYMS = _load_symbols()
+# Expose explicit API
+__all__ = [
+    "WallFixedFOVc","rescale_env_with_locations","get_next_move",
+    "masked_copy_noisy","NextStepRNN","NormReLU","HardSigmoid"
+]
